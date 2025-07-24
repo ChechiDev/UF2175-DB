@@ -1,10 +1,10 @@
 SET search_path TO educonnect; -- Lo uso para no tener que poner el 'sch' todo el rato.
 -- QUERIES:
 
--- QUERY-1:
+-- QUERY-1
 SELECT 
-	p.nombre AS profesor,
-	e.nombre AS estudiante,
+	CONCAT(p.nombre, ' ', p.apellido) AS profesor,
+	CONCAT(e.nombre, ' ', e.apellido) AS estudiante,
 	a.nombre AS asignatura,
 	r.fecha,
 	r.hora
@@ -32,4 +32,24 @@ INNER JOIN estudiantes e
 ON r.fk_estudiante = e.id_estudiante
 
 GROUP BY estudiante
+;
+
+-- QUERY-3:
+SELECT 
+	CONCAT(p.nombre, ' ', p.apellido) AS profesor,
+	a.nombre
+
+FROM profesores p
+
+INNER JOIN reservas r
+ON p.id_profesor = r.fk_profesor
+
+INNER JOIN asignaturas a
+ON r.fk_asignatura = a.id_asignatura
+
+GROUP BY
+	profesor,
+	a.nombre
+
+ORDER BY profesor ASC
 ;
