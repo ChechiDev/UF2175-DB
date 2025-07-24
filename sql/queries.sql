@@ -53,3 +53,23 @@ GROUP BY
 
 ORDER BY profesor ASC
 ;
+
+-- QUERY-4:
+SELECT
+	CONCAT(e.nombre, ' ', e.apellido) AS estudiante,
+	a.nivel AS nivel_asignatura
+
+FROM reservas r
+
+INNER JOIN estudiantes e
+ON r.fk_estudiante = e.id_estudiante
+
+INNER JOIN asignaturas a
+ON r.fk_asignatura = a.id_asignatura
+
+WHERE a.nivel = 'Avanzado'
+
+GROUP BY 
+	estudiante,
+	nivel_asignatura
+;
