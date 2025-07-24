@@ -1,7 +1,7 @@
 SET search_path TO educonnect; -- Lo uso para no tener que poner el 'sch' todo el rato.
 -- QUERIES:
 
--- QUERY 1:
+-- QUERY-1:
 SELECT 
 	p.nombre AS profesor,
 	e.nombre AS estudiante,
@@ -21,3 +21,15 @@ INNER JOIN estudiantes e
 ON e.id_estudiante = r.fk_estudiante
 ;
 
+-- QUERY-2:
+SELECT
+	CONCAT(e.nombre, ' ', e.apellido) AS estudiante,
+	COUNT(id_estudiante) AS total_reservas
+
+FROM reservas as r
+
+INNER JOIN estudiantes e
+ON r.fk_estudiante = e.id_estudiante
+
+GROUP BY estudiante
+;
